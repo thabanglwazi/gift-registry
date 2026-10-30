@@ -8,3 +8,7 @@ data/picks.csv
 .env*
 # The live admin password — never commit
 admin-password.txt
+# Coding-assistant skills added by the Upstash integration
+.agents
+.claude
+skills-lock.json
