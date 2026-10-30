@@ -55,10 +55,14 @@ function render() {
     .map(
       (g, i) => `
       <article class="card reveal" style="--i:${i}" data-id="${g.id}">
-        <div class="card-icon">${icons[g.category] || '🎁'}</div>
+        <div class="card-photo" data-icon="${icons[g.category] || '🎁'}">
+          ${g.image ? `<img src="${escapeHtml(g.image)}" alt="${escapeHtml(g.name)}" loading="lazy" referrerpolicy="no-referrer" />` : ''}
+        </div>
         <span class="tag">${escapeHtml(g.category)}</span>
         <h3>${escapeHtml(g.name)}</h3>
-        <p class="muted small">Available at ${escapeHtml(g.retailer)}</p>
+        <p class="muted small">
+          Available at ${escapeHtml(g.retailer)}${g.url ? ` · <a class="shop-link" href="${escapeHtml(g.url)}" target="_blank" rel="noopener noreferrer">View in shop ↗</a>` : ''}
+        </p>
         <div class="card-foot">
           <span class="price"><small>approx.</small> ${rand(g.price)}</span>
           <button class="btn btn-dark btn-sm" data-pick="${g.id}">I'll get this</button>
@@ -66,6 +70,10 @@ function render() {
       </article>`,
     )
     .join('');
+  // If a shop moves or removes a photo, fall back to the category emoji
+  document.querySelectorAll('.card-photo img').forEach((img) => {
+    img.addEventListener('error', () => img.remove(), { once: true });
+  });
   requestAnimationFrame(() => document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible')));
 }
 

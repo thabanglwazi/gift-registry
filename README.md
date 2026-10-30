@@ -44,6 +44,8 @@ Railway or Fly.io also work. Use the same commands, and mount a volume at the fo
 
 `data/picks.json` and `data/picks.csv` contain guest names. They are in `.gitignore` so they never reach this public repo.
 
-## Gift prices
+## Gifts, prices and photos
 
-Prices were checked online in October 2026 at Yuppiechef, Dis-Chem, Clicks, Typo and Woolworths. Items marked "Estimate" in `gifts.json` are approximate. Prices change, so the site labels them "approx.".
+There are 33 gifts. Prices, photos and links were taken from the Yuppiechef, Dis-Chem and Typo websites in October 2026. Prices change, so the site labels them "approx.".
+
+Each gift in `data/gifts.json` has a `url` (the shop's product page) and an `image`. The photos load directly from the shops' own servers and are not stored in this repo. If a shop removes a photo, that card shows a category emoji instead. To change a photo, open the product page, right-click the photo, choose "Copy image address", and paste it into `image`.
