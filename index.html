@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Gift Registry</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="blobs" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <nav class="nav">
+      <span class="logo">🎁 Gift Registry</span>
+      <a class="btn btn-dark btn-sm" href="#gifts">Choose a gift</a>
+    </nav>
+
+    <header class="hero container">
+      <span class="eyebrow" id="party-date"></span>
+      <h1 id="title"></h1>
+      <p class="lead" id="message"></p>
+      <div class="hero-actions">
+        <a class="btn btn-accent" href="#gifts">See the gifts</a>
+        <span class="muted small">All gifts are between R200 and R500</span>
+      </div>
+    </header>
+
+    <main id="gifts" class="container section">
+      <div class="section-head">
+        <h2>Pick a <em>gift</em></h2>
+        <p class="muted" id="count"></p>
+      </div>
+      <div class="chips" id="chips" role="tablist" aria-label="Filter by category"></div>
+      <div class="grid" id="grid" aria-live="polite"></div>
+      <p class="muted small note">Prices are estimates from South African retailers (October 2026) and may change.</p>
+    </main>
+
+    <footer class="container footer muted small">Made with love 💐</footer>
+
+    <dialog id="pick-dialog" class="dialog">
+      <form method="dialog" id="pick-form">
+        <span class="eyebrow">You're picking</span>
+        <h3 id="dialog-gift"></h3>
+        <p class="muted small" id="dialog-meta"></p>
+        <label for="guest-name">Your full name</label>
+        <input id="guest-name" name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="e.g. Thandi Mokoena" />
+        <p class="error" id="dialog-error" role="alert"></p>
+        <div class="dialog-actions">
+          <button type="button" class="btn btn-ghost" id="cancel">Cancel</button>
+          <button type="submit" class="btn btn-accent" id="confirm">Confirm my gift</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

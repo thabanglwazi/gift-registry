@@ -1,0 +1,29 @@
+[
+  { "id": "red-door-lotion", "name": "Elizabeth Arden Red Door Body Lotion 200ml", "category": "Beauty & Pamper", "price": 245, "retailer": "Dis-Chem", "priceCheck": "Seen online Oct 2026" },
+  { "id": "love-velvet-set", "name": "Love That Velvet Fragrance Gift Set (perfume, body lotion & spray)", "category": "Beauty & Pamper", "price": 330, "retailer": "Dis-Chem", "priceCheck": "Seen online Oct 2026" },
+  { "id": "moondrops-set", "name": "Moondrops EDT 55ml Gift Set with Body Spray", "category": "Beauty & Pamper", "price": 370, "retailer": "Dis-Chem", "priceCheck": "Seen online Oct 2026" },
+  { "id": "yardley-set", "name": "Yardley Gorgeous In Love EDP 50ml + Stayfast Lipstick", "category": "Beauty & Pamper", "price": 475, "retailer": "Dis-Chem", "priceCheck": "Seen online Oct 2026" },
+  { "id": "body-shop-set", "name": "The Body Shop Small Gift Set", "category": "Beauty & Pamper", "price": 305, "retailer": "Clicks", "priceCheck": "Seen online Oct 2026" },
+  { "id": "wbeauty-set", "name": "WBeauty Bath & Body Gift Set", "category": "Beauty & Pamper", "price": 300, "retailer": "Woolworths", "priceCheck": "Estimate" },
+  { "id": "soy-massage-candle", "name": "SoulSoy Coco Wax Massage Candle", "category": "Beauty & Pamper", "price": 350, "retailer": "SoulSoy / OneDayOnly", "priceCheck": "Estimate (R350 retail price)" },
+  { "id": "silk-pillowcase", "name": "Satin or Silk Pillowcase", "category": "Beauty & Pamper", "price": 400, "retailer": "Takealot", "priceCheck": "Estimate" },
+
+  { "id": "jewellery-box", "name": "Helio Ferretti Novelty Jewellery Box", "category": "Home & Decor", "price": 449, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" },
+  { "id": "candle-holder", "name": "Talking Tables Ceramic Candle Holder", "category": "Home & Decor", "price": 299, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" },
+  { "id": "terrazzo-coasters", "name": "Alkaline Terrazzo Coasters, Set of 4", "category": "Home & Decor", "price": 399, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" },
+  { "id": "picture-holder", "name": "Yvonne Ellen Snaps Picture Holder", "category": "Home & Decor", "price": 299, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" },
+  { "id": "white-wine-glasses", "name": "Yuppiechef Crystal White Wine Glasses, Set of 4", "category": "Home & Decor", "price": 379, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" },
+  { "id": "red-wine-glasses", "name": "JAN Crystal Red Wine Glasses, Set of 4", "category": "Home & Decor", "price": 479, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" },
+
+  { "id": "tea-for-one", "name": "Maxwell & Williams Tea-for-One Set with Infuser", "category": "Tea, Coffee & Treats", "price": 399, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" },
+  { "id": "le-creuset-mug", "name": "Le Creuset Stoneware Mug, 350ml", "category": "Tea, Coffee & Treats", "price": 379, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" },
+  { "id": "rooibos-pack", "name": "LMC Rooibos Collection Gift Pack", "category": "Tea, Coffee & Treats", "price": 349, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" },
+  { "id": "wine-six", "name": "Warwick First Lady Wine, 6-Bottle Mix", "category": "Tea, Coffee & Treats", "price": 476, "retailer": "Warwick Wine Estate", "priceCheck": "Estimate" },
+  { "id": "bouquet", "name": "Birthday Flower Bouquet", "category": "Tea, Coffee & Treats", "price": 450, "retailer": "Bloomable", "priceCheck": "Estimate (bouquets under R499)" },
+
+  { "id": "stud-earrings", "name": "Brushed Gold Stud Earrings", "category": "Style & Fun", "price": 390, "retailer": "Black Betty", "priceCheck": "Estimate" },
+  { "id": "journal", "name": "A4 Luxe Upskill Activity Journal", "category": "Style & Fun", "price": 300, "retailer": "Typo", "priceCheck": "Seen online Oct 2026" },
+  { "id": "box-of-socks", "name": "Box of Socks", "category": "Style & Fun", "price": 300, "retailer": "Typo", "priceCheck": "Seen online Oct 2026" },
+  { "id": "bee-puzzle", "name": "Printworks Bee Puzzle, 500 Pieces", "category": "Style & Fun", "price": 399, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" },
+  { "id": "pop-up-bottle", "name": "Mepal Campus Pop-Up Water Bottle, 400ml", "category": "Style & Fun", "price": 319, "retailer": "Yuppiechef", "priceCheck": "Seen online Oct 2026" }
+]

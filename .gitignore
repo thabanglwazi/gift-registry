@@ -1,0 +1,6 @@
+node_modules
+dist
+.env
+# Guest names — never commit these to the public repo
+data/picks.json
+data/picks.csv

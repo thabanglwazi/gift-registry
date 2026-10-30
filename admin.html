@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Registry Admin</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>" />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <form class="login" id="login">
+      <span class="eyebrow">Admin only</span>
+      <h2 style="margin-top:14px;font-size:28px;letter-spacing:-0.02em">Who picked <em>what</em></h2>
+      <input type="password" id="password" placeholder="Admin password" autocomplete="current-password" required />
+      <p class="error" id="login-error" role="alert"></p>
+      <button class="btn btn-dark" style="width:100%">Sign in</button>
+    </form>
+
+    <main class="container admin-wrap" id="dashboard" hidden>
+      <div class="toolbar">
+        <h2 style="font-size:clamp(28px,4vw,44px);letter-spacing:-0.03em">Picked <em>gifts</em></h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-ghost btn-sm" id="refresh">Refresh</button>
+          <button class="btn btn-accent btn-sm" id="download">Download CSV</button>
+          <button class="btn btn-ghost btn-sm" id="logout">Sign out</button>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="s-picked">0</b><span class="muted small">Gifts picked</span></div>
+        <div class="stat"><b id="s-left">0</b><span class="muted small">Still available</span></div>
+        <div class="stat"><b id="s-value">R0</b><span class="muted small">Estimated total value</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Guest</th><th>Gift</th><th>Category</th><th>Est. price</th><th>Where</th><th>Picked at</th><th></th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </main>
+
+    <script type="module" src="/src/admin.js"></script>
+  </body>
+</html>
