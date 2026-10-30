@@ -4,3 +4,7 @@ dist
 # Guest names — never commit these to the public repo
 data/picks.json
 data/picks.csv
+.vercel
+.env*
+# The live admin password — never commit
+admin-password.txt
