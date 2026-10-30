@@ -1,6 +1,6 @@
 # 🎁 Birthday Gift Registry
 
-A gift registry for a 35th birthday, built with Vite and hosted on Vercel.
+A gift registry for a 50th birthday, built with Vite and hosted on Vercel.
 
 - Guests see 32 gifts between R200 and R500. Each gift has a shop photo, a price and a "View in shop" link.
 - A guest picks a gift and enters their name, and the gift **disappears** from the public list.
