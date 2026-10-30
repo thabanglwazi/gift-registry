@@ -44,7 +44,7 @@ async function load() {
             <td>${rand(p.price)}</td>
             <td class="muted">${escapeHtml(p.retailer)}</td>
             <td class="muted">${new Date(p.pickedAt).toLocaleString('en-ZA')}</td>
-            <td><button class="btn btn-ghost btn-sm" data-release="${p.id}" title="Put this gift back on the public list">Release</button></td>
+            <td><button class="btn btn-ghost btn-sm" data-release="${escapeHtml(p.giftId)}" title="Put this gift back on the public list">Release</button></td>
           </tr>`,
         )
         .join('')
@@ -71,7 +71,7 @@ $('logout').addEventListener('click', () => {
 $('refresh').addEventListener('click', load);
 
 $('download').addEventListener('click', async () => {
-  const res = await api('/api/admin/picks.csv');
+  const res = await api('/api/admin/csv');
   const url = URL.createObjectURL(await res.blob());
   const a = Object.assign(document.createElement('a'), { href: url, download: 'gift-picks.csv' });
   a.click();
@@ -81,7 +81,7 @@ $('download').addEventListener('click', async () => {
 $('rows').addEventListener('click', async (e) => {
   const btn = e.target.closest('[data-release]');
   if (!btn || !confirm('Put this gift back on the list for other guests?')) return;
-  await api(`/api/admin/picks/${btn.dataset.release}`, { method: 'DELETE' });
+  await api(`/api/admin/picks?giftId=${encodeURIComponent(btn.dataset.release)}`, { method: 'DELETE' });
   load();
 });
 

@@ -1,17 +1,29 @@
 # 🎁 Birthday Gift Registry
 
-A gift registry for a 35th birthday, built with Vite and a small Express server.
+A gift registry for a 35th birthday, built with Vite and hosted on Vercel.
 
-- Guests see the gifts (R200–R500, with estimated prices and where to buy them).
-- A guest picks a gift and enters their name. The gift then **disappears** from the public list.
-- Every pick is saved to `picks.csv` with: date, guest name, gift, category, estimated price and shop.
-- Only the **admin page** (`/admin`, password protected) shows who picked what. The CSV is downloaded from there too.
-- The admin page can **Release** a pick to put the gift back on the list.
+- Guests see 32 gifts between R200 and R500. Each gift has a shop photo, a price and a "View in shop" link.
+- A guest picks a gift and enters their name, and the gift **disappears** from the public list.
+- Only the **admin page** (`/admin`, password protected) shows who picked what. **Download CSV** there gives a spreadsheet with the date, guest name, gift, category, price, shop and link.
+- The admin page can **Release** a pick to put that gift back on the list.
 
 ## Personalise it
 
-- Name, age, party date and message: [`src/config.js`](src/config.js)
-- Gift list and prices: [`data/gifts.json`](data/gifts.json). Each gift needs a unique `id`.
+- Her name, age, party date and message: [`src/config.js`](src/config.js)
+- The gift list: [`data/gifts.js`](data/gifts.js). Each gift needs a unique `id`.
+
+## Deploy to Vercel
+
+Vercel doesn't keep saved files, so picks are stored in a free **Upstash Redis** database.
+
+1. Go to [vercel.com/new](https://vercel.com/new), sign in with GitHub, and **Import** this repo. Vercel detects Vite on its own, so leave the build settings as they are.
+2. Before clicking Deploy, open **Environment Variables** and add `ADMIN_PASSWORD` with a strong password.
+3. Click **Deploy**.
+4. In the project, go to **Storage → Create Database → Upstash (Redis)**. Choose the free plan and connect it to the project. This adds `KV_REST_API_URL` and `KV_REST_API_TOKEN` for you.
+5. Go to **Deployments → ⋯ → Redeploy** so the site picks up the database.
+6. Share `https://<your-project>.vercel.app` with guests. Open `/admin` for the admin page.
+
+Each later push to `main` redeploys the site on its own.
 
 ## Run it locally
 
@@ -23,29 +35,15 @@ npm run dev
 - Guest page: http://localhost:5173
 - Admin page: http://localhost:5173/admin.html. The local default password is `changeme`.
 
-## Host it online (Render)
+Locally, picks are saved to `data/picks.json` and `data/picks.csv`. Those files are in `.gitignore`, so guest names never reach this public repo.
 
-The server writes picks to a file, so the host needs a **persistent disk**. Static-only hosts such as Netlify, Vercel or GitHub Pages will not work.
+## How it's built
 
-1. Push this repo to GitHub.
-2. On [render.com](https://render.com), go to **New → Web Service** and connect this repo.
-3. Use these settings:
-   - Build command: `npm install && npm run build`
-   - Start command: `npm start`
-4. Add these **Environment variables**:
-   - `ADMIN_PASSWORD`: choose a strong password.
-   - `DATA_DIR`: `/var/data`
-5. Under **Disks**, add a disk mounted at `/var/data` (1 GB is plenty). Disks need a paid instance. On the free plan, picks are wiped whenever the service restarts.
-6. Share the site URL with guests. Open `https://your-site.onrender.com/admin` for the admin page.
+- `index.html`, `admin.html`, `src/`: the Vite front end.
+- `api/`: Vercel serverless functions. Each one points to a handler in `lib/handlers.js`.
+- `lib/store.js`: saves picks to Redis when a database is connected, or to a local file otherwise.
+- `server.js`: local Express server that runs the same handlers.
 
-Railway or Fly.io also work. Use the same commands, and mount a volume at the folder you set as `DATA_DIR`.
+## Gift prices and photos
 
-## Privacy
-
-`data/picks.json` and `data/picks.csv` contain guest names. They are in `.gitignore` so they never reach this public repo.
-
-## Gifts, prices and photos
-
-There are 33 gifts. Prices, photos and links were taken from the Yuppiechef, Dis-Chem and Typo websites in October 2026. Prices change, so the site labels them "approx.".
-
-Each gift in `data/gifts.json` has a `url` (the shop's product page) and an `image`. The photos load directly from the shops' own servers and are not stored in this repo. If a shop removes a photo, that card shows a category emoji instead. To change a photo, open the product page, right-click the photo, choose "Copy image address", and paste it into `image`.
+Prices, photos and links were taken from CUM Books, Dis-Chem and Yuppiechef in October 2026. Prices change, so the site labels them "approx.". The photos load from the shops' own servers. If a shop removes a photo, that card shows a category emoji instead.

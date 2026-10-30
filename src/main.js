@@ -3,10 +3,10 @@ import { config } from './config.js';
 const $ = (id) => document.getElementById(id);
 const rand = (n) => `R${n.toLocaleString('en-ZA')}`;
 const icons = {
-  'Beauty & Pamper': '🧴',
-  'Home & Decor': '🕯️',
-  'Tea, Coffee & Treats': '🍵',
-  'Style & Fun': '✨',
+  'Faith & Devotion': '🙏',
+  'Fragrance & Pamper': '🌸',
+  'Makeup & Hair': '💄',
+  'Elegant Extras': '✨',
 };
 
 let gifts = [];
