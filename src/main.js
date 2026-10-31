@@ -3,9 +3,10 @@ import { config } from './config.js';
 const $ = (id) => document.getElementById(id);
 const rand = (n) => `R${n.toLocaleString('en-ZA')}`;
 const icons = {
+  Perfume: '🌸',
+  Jewellery: '💎',
+  'Pamper & Beauty': '💄',
   'Faith & Devotion': '🙏',
-  'Fragrance & Pamper': '🌸',
-  'Makeup & Hair': '💄',
   'Elegant Extras': '✨',
 };
 
