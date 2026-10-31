@@ -12,3 +12,5 @@ admin-password.txt
 .agents
 .claude
 skills-lock.json
+# Cheryl's photo: deployed to the site, kept out of the public repo
+public/cheryl.jpg

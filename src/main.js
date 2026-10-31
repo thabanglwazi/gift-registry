@@ -5,9 +5,10 @@ const rand = (n) => `R${n.toLocaleString('en-ZA')}`;
 const icons = {
   Perfume: '🌸',
   Jewellery: '💎',
+  Accessories: '🕶️',
   'Pamper & Beauty': '💄',
   'Faith & Devotion': '🙏',
-  'Elegant Extras': '✨',
+  'Fun Extras': '✨',
 };
 
 let gifts = [];
@@ -15,6 +16,7 @@ let filter = 'All';
 let selected = null;
 
 $('party-date').textContent = config.partyDate;
+$('hero-photo').alt = config.celebrantName;
 $('title').innerHTML = `${escapeHtml(config.celebrantName)} is turning <em>${config.age}</em>`;
 $('message').textContent = config.message;
 document.title = `${config.celebrantName}'s ${config.age}th Birthday Gift Registry`;
