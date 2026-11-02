@@ -2,6 +2,7 @@
 
 A gift registry for a 50th birthday, built with Vite and hosted on Vercel.
 
+- `/manage` (no password) lets you remove gifts you don't want guests to see, and bring them back later.
 - Guests see 99 gifts between R50 and R400. Each gift has a shop photo, a price and a "View in shop" link.
 - A guest picks a gift and enters their name, and the gift **disappears** from the public list.
 - Only the **admin page** (`/admin`, password protected) shows who picked what. **Download CSV** there gives a spreadsheet with the date, guest name, gift, category, price, shop and link.

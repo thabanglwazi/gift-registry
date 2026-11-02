@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#fdfaf4" />
+    <title>Manage Gifts</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main class="container admin-wrap">
+      <div class="toolbar">
+        <div>
+          <span class="eyebrow">Manage the list</span>
+          <h2 style="margin-top:12px;font-size:clamp(28px,4vw,44px);letter-spacing:-0.03em">Remove <em>gifts</em></h2>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="/">View the registry ↗</a>
+      </div>
+      <p class="muted" style="max-width:60ch">
+        Tap <b>Remove</b> on any gift you don't want guests to see. It disappears from the registry straight away.
+        Changed your mind? Open <b>Removed</b> and tap <b>Bring back</b>.
+      </p>
+
+      <div class="stats">
+        <div class="stat"><b id="s-shown">0</b><span class="muted small">On the list</span></div>
+        <div class="stat"><b id="s-hidden">0</b><span class="muted small">Removed</span></div>
+        <div class="stat"><b id="s-picked">0</b><span class="muted small">Picked by guests</span></div>
+      </div>
+
+      <input class="search" id="search" type="search" placeholder="Search gifts…" aria-label="Search gifts" />
+      <div class="chips" id="views" role="tablist" aria-label="Show">
+        <button class="chip active" data-view="shown">On the list</button>
+        <button class="chip" data-view="hidden">Removed</button>
+        <button class="chip" data-view="all">All gifts</button>
+      </div>
+
+      <ul class="manage-list" id="list" aria-live="polite"></ul>
+    </main>
+
+    <div class="toast" id="toast" role="status"></div>
+
+    <script type="module" src="/src/manage.js"></script>
+  </body>
+</html>
