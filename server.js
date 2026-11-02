@@ -2,7 +2,7 @@
 // `npm run dev` pairs it with Vite; `npm start` also serves the built site.
 import express from 'express';
 import path from 'node:path';
-import { listGifts, pickGift, adminPicks, adminCsv, manageGifts } from './lib/handlers.js';
+import { listGifts, pickGift, adminPicks, adminCsv, adminGifts, manageGifts } from './lib/handlers.js';
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -19,6 +19,7 @@ app.all('/api/gifts', safe(listGifts));
 app.all('/api/pick', safe(pickGift));
 app.all('/api/admin/picks', safe(adminPicks));
 app.all('/api/admin/csv', safe(adminCsv));
+app.all('/api/admin/gifts', safe(adminGifts));
 app.all('/api/manage', safe(manageGifts));
 
 if (process.env.NODE_ENV === 'production') {

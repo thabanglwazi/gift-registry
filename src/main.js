@@ -9,6 +9,8 @@ const icons = {
   Accessories: '🕶️',
   'Pamper & Beauty': '💄',
   'Faith & Devotion': '🙏',
+  'Fitness & Running': '👟',
+  'Home & Kitchen': '🏡',
   'Fun Extras': '✨',
 };
 

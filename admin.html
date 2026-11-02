@@ -20,25 +20,89 @@
 
     <main class="container admin-wrap" id="dashboard" hidden>
       <div class="toolbar">
-        <h2 style="font-size:clamp(28px,4vw,44px);letter-spacing:-0.03em">Picked <em>gifts</em></h2>
+        <div class="chips" id="tabs" role="tablist" aria-label="Admin sections" style="margin:0">
+          <button class="chip active" data-tab="picks">Picked gifts</button>
+          <button class="chip" data-tab="gifts">Edit gifts</button>
+        </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button class="btn btn-ghost btn-sm" id="refresh">Refresh</button>
-          <button class="btn btn-accent btn-sm" id="download">Download CSV</button>
           <button class="btn btn-ghost btn-sm" id="logout">Sign out</button>
         </div>
       </div>
-      <div class="stats">
-        <div class="stat"><b id="s-picked">0</b><span class="muted small">Gifts picked</span></div>
-        <div class="stat"><b id="s-left">0</b><span class="muted small">Still available</span></div>
-        <div class="stat"><b id="s-value">R0</b><span class="muted small">Estimated total value</span></div>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Guest</th><th>Gift</th><th>Category</th><th>Est. price</th><th>Where</th><th>Picked at</th><th></th></tr></thead>
-          <tbody id="rows"></tbody>
-        </table>
-      </div>
+
+      <section id="tab-picks">
+        <div class="toolbar" style="margin-top:28px">
+          <h2 style="font-size:clamp(28px,4vw,44px);letter-spacing:-0.03em">Picked <em>gifts</em></h2>
+          <button class="btn btn-accent btn-sm" id="download">Download CSV</button>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="s-picked">0</b><span class="muted small">Gifts picked</span></div>
+          <div class="stat"><b id="s-left">0</b><span class="muted small">Still available</span></div>
+          <div class="stat"><b id="s-value">R0</b><span class="muted small">Estimated total value</span></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Guest</th><th>Gift</th><th>Category</th><th>Est. price</th><th>Where</th><th>Picked at</th><th></th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-gifts" hidden>
+        <div class="toolbar" style="margin-top:28px">
+          <h2 style="font-size:clamp(28px,4vw,44px);letter-spacing:-0.03em">Edit <em>gifts</em></h2>
+          <button class="btn btn-accent btn-sm" id="add-gift">+ Add a gift</button>
+        </div>
+        <p class="muted" style="max-width:62ch">Change a gift's name, price, shop link or photo, or add a new one. Changes show on the registry straight away. To hide a gift from guests, use <a class="shop-link" href="/manage">/manage</a>.</p>
+        <input class="search" id="gift-search" type="search" placeholder="Search gifts…" aria-label="Search gifts" />
+        <ul class="manage-list" id="gift-list" style="margin-top:20px"></ul>
+      </section>
     </main>
+
+    <dialog id="edit-dialog" class="dialog dialog-wide">
+      <form method="dialog" id="edit-form">
+        <span class="eyebrow" id="edit-eyebrow">Edit gift</span>
+        <label for="f-name">Gift name</label>
+        <input id="f-name" required maxlength="160" />
+        <div class="form-row">
+          <div>
+            <label for="f-category">Category</label>
+            <input id="f-category" list="categories" required maxlength="40" />
+            <datalist id="categories"></datalist>
+          </div>
+          <div>
+            <label for="f-price">Price (R)</label>
+            <input id="f-price" type="number" min="1" step="1" required inputmode="numeric" />
+          </div>
+        </div>
+        <label for="f-retailer">Shop</label>
+        <input id="f-retailer" maxlength="60" placeholder="e.g. Takealot" />
+        <label for="f-url">Shop link</label>
+        <input id="f-url" type="url" placeholder="https://…" />
+        <label for="f-image">Photo link</label>
+        <input id="f-image" type="url" placeholder="https://… (right-click the shop photo → Copy image address)" />
+        <p class="error" id="edit-error" role="alert"></p>
+        <div class="dialog-actions">
+          <button type="button" class="btn btn-ghost" id="edit-undo" hidden>Undo my changes</button>
+          <button type="button" class="btn btn-ghost" id="edit-cancel">Cancel</button>
+          <button type="submit" class="btn btn-accent" id="edit-save">Save</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="remove-dialog" class="dialog">
+      <span class="eyebrow">Remove pick</span>
+      <h3 id="remove-title"></h3>
+      <p class="muted small" id="remove-meta"></p>
+      <p class="muted">What should happen to this gift?</p>
+      <div class="stack-actions">
+        <button class="btn btn-accent" data-remove="back">Remove, and put the gift back on the list</button>
+        <button class="btn btn-ghost" data-remove="off">Remove, and keep the gift off the list</button>
+        <button class="btn btn-ghost" data-remove="cancel">Cancel</button>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status"></div>
 
     <script type="module" src="/src/admin.js"></script>
   </body>

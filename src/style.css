@@ -226,3 +226,14 @@ tr:last-child td { border-bottom: 0; }
   .manage-thumb { width: 52px; height: 52px; }
   .manage-item .btn { grid-column: 1 / -1; width: 100%; }
 }
+
+/* Admin: edit and remove dialogs */
+.dialog-wide { width: min(560px, calc(100% - 32px)); }
+.form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.stack-actions { display: grid; gap: 10px; margin-top: 18px; }
+@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+/* Keep the Remove button in view when the picks table scrolls sideways */
+td:last-child { position: sticky; right: 0; background: var(--surface); box-shadow: -8px 0 12px -10px rgba(0, 0, 0, 0.25); }
+th:last-child { position: sticky; right: 0; }
+
+[hidden] { display: none !important; }
