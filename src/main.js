@@ -5,6 +5,7 @@ const rand = (n) => `R${n.toLocaleString('en-ZA')}`;
 const icons = {
   Perfume: '🌸',
   Jewellery: '💎',
+  'Spa Day': '🧖‍♀️',
   Accessories: '🕶️',
   'Pamper & Beauty': '💄',
   'Faith & Devotion': '🙏',
@@ -60,6 +61,7 @@ function render() {
       <article class="card reveal" style="--i:${i}" data-id="${g.id}">
         <div class="card-photo" data-icon="${icons[g.category] || '🎁'}">
           ${g.image ? `<img src="${escapeHtml(g.image)}" alt="${escapeHtml(g.name)}" loading="lazy" referrerpolicy="no-referrer" />` : ''}
+          ${g.badge ? `<span class="badge">💛 ${escapeHtml(g.badge)}</span>` : ''}
         </div>
         <span class="tag">${escapeHtml(g.category)}</span>
         <h3>${escapeHtml(g.name)}</h3>
