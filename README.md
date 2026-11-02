@@ -2,7 +2,7 @@
 
 A gift registry for a 50th birthday, built with Vite and hosted on Vercel.
 
-- `/admin` (password) shows who picked what. You can remove a pick, and on the Edit gifts tab change any gift's name, price, link or photo, or add new gifts.
+- `/admin` (password) shows who picked what. You can remove a pick, and on the Edit gifts tab change, add, delete or restore gifts.
 - `/manage` (no password) lets you remove gifts you don't want guests to see, and bring them back later.
 - Guests see 96 gifts. Each gift has a shop photo, a price and a "View in shop" link.
 - A guest picks a gift and enters their name, and the gift **disappears** from the public list.

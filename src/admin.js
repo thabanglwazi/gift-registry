@@ -68,23 +68,37 @@ function renderPicks() {
 
 function renderGifts() {
   const q = $('gift-search').value.trim().toLowerCase();
-  const shown = gifts.filter((g) => !q || `${g.name} ${g.category} ${g.retailer}`.toLowerCase().includes(q));
+  // Deleted gifts go to the bottom so they're out of the way but can still be restored
+  const shown = gifts
+    .filter((g) => !q || `${g.name} ${g.category} ${g.retailer}`.toLowerCase().includes(q))
+    .sort((a, b) => Number(Boolean(a.deleted)) - Number(Boolean(b.deleted)));
   $('categories').innerHTML = [...new Set(gifts.map((g) => g.category))].map((c) => `<option value="${escapeHtml(c)}">`).join('');
   $('gift-list').innerHTML = shown.length
     ? shown
         .map((g) => {
-          const tags = [g.added && 'Added by you', g.edited && 'Edited', g.picked && 'Picked', g.hidden && 'Removed from list']
+          const tags = [
+            g.deleted && 'Deleted',
+            g.added && 'Added by you',
+            g.edited && 'Edited',
+            g.picked && 'Picked',
+            g.hidden && 'Removed from list',
+          ]
             .filter(Boolean)
             .map((t) => ` · <span class="pill">${t}</span>`)
             .join('');
+          const id = escapeHtml(g.id);
+          const buttons = g.deleted
+            ? `<button class="btn btn-accent btn-sm" data-restore="${id}">Restore</button>`
+            : `<button class="btn btn-ghost btn-sm" data-edit="${id}">Edit</button>
+               <button class="btn btn-ghost btn-sm btn-danger" data-delete="${id}">Delete</button>`;
           return `
-          <li class="manage-item">
+          <li class="manage-item ${g.deleted ? 'is-hidden' : ''}">
             <div class="manage-thumb">${g.image ? `<img src="${escapeHtml(g.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" />` : ''}</div>
             <div class="manage-info">
               <b>${escapeHtml(g.name)}</b>
               <span class="muted small">${escapeHtml(g.category)} · ${rand(g.price)} · ${escapeHtml(g.retailer || '')}${tags}</span>
             </div>
-            <button class="btn btn-ghost btn-sm" data-edit="${escapeHtml(g.id)}">Edit</button>
+            <div class="row-actions">${buttons}</div>
           </li>`;
         })
         .join('')
@@ -154,15 +168,33 @@ function openEditor(gift) {
   editing = gift;
   $('edit-eyebrow').textContent = gift.id ? 'Edit gift' : 'Add a gift';
   for (const k of ['name', 'category', 'price', 'retailer', 'url', 'image']) $(`f-${k}`).value = gift[k] ?? '';
-  $('edit-undo').hidden = !(gift.edited || gift.added);
-  $('edit-undo').textContent = gift.added ? 'Delete this gift' : 'Undo my changes';
+  $('edit-undo').hidden = !gift.edited;
   $('edit-error').textContent = '';
   $('edit-dialog').showModal();
 }
 
-$('gift-list').addEventListener('click', (e) => {
-  const btn = e.target.closest('[data-edit]');
-  if (btn) openEditor(gifts.find((g) => g.id === btn.dataset.edit));
+$('gift-list').addEventListener('click', async (e) => {
+  const edit = e.target.closest('[data-edit]');
+  if (edit) return openEditor(gifts.find((g) => g.id === edit.dataset.edit));
+
+  const del = e.target.closest('[data-delete]');
+  if (del) {
+    const gift = gifts.find((g) => g.id === del.dataset.delete);
+    const note = gift.picked ? '\n\nA guest has already picked it. Their pick stays on the Picked gifts tab.' : '';
+    if (!confirm(`Delete "${gift.name}" from the registry?${note}`)) return;
+    del.disabled = true;
+    const res = await api(`/api/admin/gifts?giftId=${encodeURIComponent(gift.id)}`, { method: 'DELETE' });
+    toast(res.ok ? (gift.added ? 'Gift deleted.' : 'Gift deleted. You can restore it at the bottom of the list.') : 'Could not delete that gift.');
+    return load();
+  }
+
+  const restore = e.target.closest('[data-restore]');
+  if (restore) {
+    restore.disabled = true;
+    const res = await api(`/api/admin/gifts?giftId=${encodeURIComponent(restore.dataset.restore)}&undo=1`, { method: 'DELETE' });
+    toast(res.ok ? 'Gift restored to the registry.' : 'Could not restore that gift.');
+    load();
+  }
 });
 
 $('add-gift').addEventListener('click', () => openEditor({}));
@@ -191,11 +223,10 @@ $('edit-form').addEventListener('submit', async (e) => {
 });
 
 $('edit-undo').addEventListener('click', async () => {
-  const msg = editing.added ? 'Delete this gift from the registry?' : 'Go back to the original name, price, link and photo?';
-  if (!confirm(msg)) return;
-  await api(`/api/admin/gifts?giftId=${encodeURIComponent(editing.id)}`, { method: 'DELETE' });
+  if (!confirm('Go back to the original name, price, link and photo?')) return;
+  await api(`/api/admin/gifts?giftId=${encodeURIComponent(editing.id)}&undo=1`, { method: 'DELETE' });
   $('edit-dialog').close();
-  toast(editing.added ? 'Gift deleted.' : 'Changes undone.');
+  toast('Changes undone.');
   load();
 });
 

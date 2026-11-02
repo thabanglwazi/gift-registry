@@ -237,3 +237,7 @@ td:last-child { position: sticky; right: 0; background: var(--surface); box-shad
 th:last-child { position: sticky; right: 0; }
 
 [hidden] { display: none !important; }
+.row-actions { display: flex; gap: 8px; }
+.btn-danger { color: #b03a2e; }
+.btn-danger:hover { border-color: #b03a2e; }
+@media (max-width: 560px) { .row-actions { grid-column: 1 / -1; } .row-actions .btn { flex: 1; } }
